@@ -156,6 +156,42 @@
             animation: glitchText 5s infinite;
         }
         
+        /* Workspace Card Animations - ENHANCED */
+        .workspace-card {
+            opacity: 0;
+            transform: translateX(0);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform, opacity;
+        }
+        
+        /* Cards on left side come from left */
+        .workspace-card:nth-child(odd) {
+            transform: translateX(-100px);
+        }
+        
+        /* Cards on right side come from right */
+        .workspace-card:nth-child(even) {
+            transform: translateX(100px);
+        }
+        
+        /* Intro animation when scrolled into view */
+        .workspace-card.card-intro {
+            opacity: 1;
+            transform: translateX(0) translateY(0) scale(1);
+        }
+        
+        /* Outro animation when scrolled out (reverse) */
+        .workspace-card.card-outro {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+        
+        /* Special effect for cards in view */
+        .workspace-card.card-in-view {
+            box-shadow: 0 0 30px rgba(0, 224, 255, 0.3), 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: translateX(0) translateY(-5px);
+        }
+        
         /* Container Animation Classes */
         .container-intro {
             opacity: 0;
@@ -352,6 +388,10 @@
             padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .section-title {
@@ -483,7 +523,7 @@
             padding: 2rem;
             border: 1px solid var(--glass-border);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .glass-card:hover {
@@ -943,6 +983,26 @@
             100% { transform: translateX(100%); }
         }
         
+        @keyframes cardSlideInLeft {
+            from { opacity: 0; transform: translateX(-100px) rotate(-5deg); }
+            to { opacity: 1; transform: translateX(0) rotate(0); }
+        }
+        
+        @keyframes cardSlideInRight {
+            from { opacity: 0; transform: translateX(100px) rotate(5deg); }
+            to { opacity: 1; transform: translateX(0) rotate(0); }
+        }
+        
+        @keyframes cardSlideOutLeft {
+            from { opacity: 1; transform: translateX(0) rotate(0); }
+            to { opacity: 0; transform: translateX(-100px) rotate(-5deg); }
+        }
+        
+        @keyframes cardSlideOutRight {
+            from { opacity: 1; transform: translateX(0) rotate(0); }
+            to { opacity: 0; transform: translateX(100px) rotate(5deg); }
+        }
+        
         /* Original Animation Keyframes */
         @keyframes float {
             0% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
@@ -989,6 +1049,20 @@
             
             .mission-vision {
                 grid-template-columns: 1fr;
+            }
+            
+            /* On mobile, all cards come from bottom */
+            .workspace-card:nth-child(odd),
+            .workspace-card:nth-child(even) {
+                transform: translateY(100px);
+            }
+            
+            .workspace-card.card-intro {
+                transform: translateY(0) translateX(0);
+            }
+            
+            .workspace-card.card-outro {
+                transform: translateY(100px);
             }
         }
         
@@ -1131,17 +1205,17 @@
         <p class="section-subtitle">Cutting-edge technology company specializing in AI and Agent-based solutions</p>
         
         <div class="about-content">
-            <div class="glass-card container-intro hover-float" style="animation-delay: 0.2s">
+            <div class="glass-card workspace-card hover-float">
                 <p class="about-text">Aventro Tech Solutions is a cutting-edge technology company specializing in AI and Agent-based solutions. We empower businesses of all sizes with custom AI/ML development, from initial concept to full-scale deployment.</p>
                 <p class="about-text" style="margin-top: 1.5rem;">Our team of expert developers and data scientists deliver innovative solutions that transform how businesses operate.</p>
             </div>
             
             <div class="mission-vision">
-                <div class="mission glass-card container-intro hover-float" style="animation-delay: 0.3s">
+                <div class="mission glass-card workspace-card hover-float">
                     <h3><i class="fas fa-bullseye"></i> Mission</h3>
                     <p>To democratize AI technology and make intelligent solutions accessible to businesses worldwide.</p>
                 </div>
-                <div class="vision glass-card container-intro hover-float" style="animation-delay: 0.4s">
+                <div class="vision glass-card workspace-card hover-float">
                     <h3><i class="fas fa-eye"></i> Vision</h3>
                     <p>To be the global leader in AI innovation, shaping a smarter, more connected future.</p>
                 </div>
@@ -1150,28 +1224,28 @@
         
         <!-- Core Values -->
         <div class="core-values">
-            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
+            <div class="value-card glass-card workspace-card hover-float">
                 <div class="value-icon">
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <h3>Innovation First</h3>
                 <p>We constantly push boundaries to deliver cutting-edge AI solutions.</p>
             </div>
-            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
+            <div class="value-card glass-card workspace-card hover-float">
                 <div class="value-icon">
                     <i class="fas fa-users"></i>
                 </div>
                 <h3>Client-Centric</h3>
                 <p>Your success is our priority. We tailor solutions to your specific needs.</p>
             </div>
-            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
+            <div class="value-card glass-card workspace-card hover-float">
                 <div class="value-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3>Integrity</h3>
                 <p>We maintain the highest ethical standards in all our engagements.</p>
             </div>
-            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
+            <div class="value-card glass-card workspace-card hover-float">
                 <div class="value-icon">
                     <i class="fas fa-rocket"></i>
                 </div>
@@ -1182,19 +1256,19 @@
         
         <!-- Stats Counter -->
         <div class="stats">
-            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
+            <div class="stat-card glass-card workspace-card hover-float">
                 <div class="stat-number" id="projectsCount">0</div>
                 <div class="stat-text">Projects Completed</div>
             </div>
-            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
+            <div class="stat-card glass-card workspace-card hover-float">
                 <div class="stat-number" id="clientsCount">0</div>
                 <div class="stat-text">Clients Served</div>
             </div>
-            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
+            <div class="stat-card glass-card workspace-card hover-float">
                 <div class="stat-number" id="solutionsCount">0</div>
                 <div class="stat-text">AI Solutions</div>
             </div>
-            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
+            <div class="stat-card glass-card workspace-card hover-float">
                 <div class="stat-number">24/7</div>
                 <div class="stat-text">Support</div>
             </div>
@@ -1207,7 +1281,7 @@
         <p class="section-subtitle">Comprehensive AI solutions designed to transform your business</p>
         
         <div class="services-grid">
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.1s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-brain"></i>
                 </div>
@@ -1215,7 +1289,7 @@
                 <p>Custom machine learning models and AI systems tailored to your business needs.</p>
             </div>
             
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
@@ -1223,7 +1297,7 @@
                 <p>Advanced analytics to forecast trends and make data-driven decisions.</p>
             </div>
             
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-eye"></i>
                 </div>
@@ -1231,7 +1305,7 @@
                 <p>Image and video analysis solutions for automation and insights.</p>
             </div>
             
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-network-wired"></i>
                 </div>
@@ -1239,7 +1313,7 @@
                 <p>Design and implementation of deep learning neural networks.</p>
             </div>
             
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-robot"></i>
                 </div>
@@ -1247,7 +1321,7 @@
                 <p>Intelligent agent systems for automation and complex task management.</p>
             </div>
             
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.6s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-comments"></i>
                 </div>
@@ -1255,7 +1329,7 @@
                 <p>Large Language Model integration and custom agent development.</p>
             </div>
             
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.7s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-cogs"></i>
                 </div>
@@ -1263,7 +1337,7 @@
                 <p>Streamline business processes with intelligent automation solutions.</p>
             </div>
             
-            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.8s">
+            <div class="service-card glass-card workspace-card hover-float">
                 <div class="service-icon">
                     <i class="fas fa-cloud-upload-alt"></i>
                 </div>
@@ -1279,7 +1353,7 @@
         <p class="section-subtitle">Empowering the next generation of AI professionals</p>
         
         <div class="programs-grid">
-            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.1s">
+            <div class="program-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-user-graduate"></i> Internship Program</h3>
                 <div class="program-detail"><i class="fas fa-calendar-alt"></i> Duration: 3–6 Months</div>
                 <div class="program-detail"><i class="fas fa-project-diagram"></i> Real-world AI projects</div>
@@ -1288,7 +1362,7 @@
                 <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Apply Now</a>
             </div>
             
-            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
+            <div class="program-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-university"></i> Academic Projects</h3>
                 <div class="program-detail"><i class="fas fa-clock"></i> Flexible duration</div>
                 <div class="program-detail"><i class="fas fa-file-alt"></i> Documentation support</div>
@@ -1297,7 +1371,7 @@
                 <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Start Project</a>
             </div>
             
-            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
+            <div class="program-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-workshop"></i> Workshops</h3>
                 <div class="program-detail"><i class="fas fa-calendar-alt"></i> Duration: 1–5 Days</div>
                 <div class="program-detail"><i class="fas fa-laptop-code"></i> Hands-on coding sessions</div>
@@ -1306,7 +1380,7 @@
                 <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Join Workshop</a>
             </div>
             
-            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
+            <div class="program-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-campground"></i> Boot Camps</h3>
                 <div class="program-detail"><i class="fas fa-calendar-alt"></i> Duration: 4–12 Weeks</div>
                 <div class="program-detail"><i class="fas fa-briefcase"></i> Career guidance</div>
@@ -1323,32 +1397,32 @@
         <p class="section-subtitle">What sets us apart in the AI solutions landscape</p>
         
         <div class="features-grid">
-            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.1s">
+            <div class="feature-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-microchip"></i> Cutting-Edge Technology</h3>
                 <p>We use the latest AI frameworks and tools to deliver state-of-the-art solutions.</p>
             </div>
             
-            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
+            <div class="feature-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-shield-alt"></i> Security First</h3>
                 <p>Your data and intellectual property are protected with enterprise-grade security.</p>
             </div>
             
-            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
+            <div class="feature-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-handshake"></i> Client Partnership</h3>
                 <p>We work closely with you throughout the project lifecycle, ensuring alignment with your goals.</p>
             </div>
             
-            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
+            <div class="feature-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-bolt"></i> Rapid Delivery</h3>
                 <p>Agile development methodology ensures faster time-to-market for your AI solutions.</p>
             </div>
             
-            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
+            <div class="feature-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-expand-arrows-alt"></i> Scalable Solutions</h3>
                 <p>Our architectures are designed to grow with your business needs.</p>
             </div>
             
-            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.6s">
+            <div class="feature-card glass-card workspace-card hover-float">
                 <h3><i class="fas fa-headset"></i> 24/7 Support</h3>
                 <p>Round-the-clock technical support and maintenance for all our solutions.</p>
             </div>
@@ -1361,7 +1435,7 @@
         <p class="section-subtitle">Get in touch to discuss your AI project or training needs</p>
         
         <div class="contact-container">
-            <div class="contact-info glass-card container-intro hover-float" style="animation-delay: 0.1s">
+            <div class="contact-info glass-card workspace-card hover-float">
                 <h3>Contact Information</h3>
                 <div class="contact-details">
                     <div class="contact-detail">
@@ -1396,7 +1470,7 @@
                 </div>
             </div>
             
-            <div class="contact-form glass-card container-intro hover-float" style="animation-delay: 0.2s">
+            <div class="contact-form glass-card workspace-card hover-float">
                 <h3>Send us a Message</h3>
                 <form id="contactForm">
                     <div class="form-group">
@@ -1478,8 +1552,7 @@
     
     <script>
         // Initialize EmailJS with your public key
-        // Note: Replace with your actual EmailJS public key
-        emailjs.init('YOUR_PUBLIC_KEY'); // You'll need to get this from EmailJS dashboard
+        emailjs.init('YOUR_PUBLIC_KEY');
         
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1511,7 +1584,7 @@
         function animateCounter(elementId, finalValue, duration = 2000) {
             const element = document.getElementById(elementId);
             let startValue = 0;
-            const increment = finalValue / (duration / 16); // 60fps
+            const increment = finalValue / (duration / 16);
             let currentValue = 0;
             
             const timer = setInterval(() => {
@@ -1524,6 +1597,171 @@
                 }
             }, 16);
         }
+        
+        // Track scroll direction and last scroll position
+        let lastScrollTop = 0;
+        let scrollDirection = 'down';
+        
+        // Workspace card animation manager
+        class CardAnimationManager {
+            constructor() {
+                this.cards = document.querySelectorAll('.workspace-card');
+                this.cardStates = new Map();
+                this.scrollDirection = 'down';
+                this.lastScrollTop = 0;
+                this.init();
+            }
+            
+            init() {
+                // Initialize card states
+                this.cards.forEach((card, index) => {
+                    this.cardStates.set(card, {
+                        isInView: false,
+                        wasInView: false,
+                        index: index,
+                        position: this.getCardPosition(card),
+                        hasAnimated: false
+                    });
+                    
+                    // Set initial positions based on card index (odd/even)
+                    if (index % 2 === 0) {
+                        // Even cards come from left
+                        card.style.transform = 'translateX(-100px)';
+                    } else {
+                        // Odd cards come from right
+                        card.style.transform = 'translateX(100px)';
+                    }
+                    card.style.opacity = '0';
+                    card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                });
+                
+                // Initial check
+                this.checkCards();
+                
+                // Listen for scroll
+                window.addEventListener('scroll', () => this.handleScroll());
+                window.addEventListener('resize', () => this.handleResize());
+            }
+            
+            getCardPosition(card) {
+                const rect = card.getBoundingClientRect();
+                return {
+                    top: rect.top + window.scrollY,
+                    bottom: rect.bottom + window.scrollY,
+                    height: rect.height
+                };
+            }
+            
+            handleResize() {
+                // Update card positions on resize
+                this.cards.forEach(card => {
+                    const state = this.cardStates.get(card);
+                    if (state) {
+                        state.position = this.getCardPosition(card);
+                    }
+                });
+            }
+            
+            handleScroll() {
+                // Determine scroll direction
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                this.scrollDirection = scrollTop > this.lastScrollTop ? 'down' : 'up';
+                this.lastScrollTop = scrollTop;
+                
+                // Check cards
+                this.checkCards();
+            }
+            
+            checkCards() {
+                const viewportHeight = window.innerHeight;
+                const scrollPosition = window.scrollY;
+                const triggerOffset = viewportHeight * 0.8;
+                
+                this.cards.forEach(card => {
+                    const state = this.cardStates.get(card);
+                    if (!state) return;
+                    
+                    const cardTop = state.position.top;
+                    const cardBottom = state.position.bottom;
+                    const cardHeight = state.position.height;
+                    
+                    // Calculate if card is in view
+                    const isInView = (
+                        cardTop < scrollPosition + triggerOffset &&
+                        cardBottom > scrollPosition + (viewportHeight - triggerOffset)
+                    );
+                    
+                    // Handle intro/outro based on scroll direction
+                    if (isInView && !state.isInView) {
+                        // Card entering viewport
+                        this.animateCardIn(card, state.index);
+                        state.isInView = true;
+                        state.wasInView = true;
+                        state.hasAnimated = true;
+                    } else if (!isInView && state.isInView) {
+                        // Card leaving viewport
+                        if (this.scrollDirection === 'up' && state.hasAnimated) {
+                            // Only animate out when scrolling up and card was previously animated
+                            this.animateCardOut(card, state.index);
+                        }
+                        state.isInView = false;
+                    }
+                    
+                    // Special effect for cards centered in view
+                    const isCentered = (
+                        cardTop < scrollPosition + viewportHeight / 2 &&
+                        cardBottom > scrollPosition + viewportHeight / 2
+                    );
+                    
+                    if (isCentered && state.isInView) {
+                        card.classList.add('card-in-view');
+                    } else {
+                        card.classList.remove('card-in-view');
+                    }
+                });
+            }
+            
+            animateCardIn(card, index) {
+                // Remove any existing classes
+                card.classList.remove('card-outro');
+                
+                // Add intro class with delay based on position
+                setTimeout(() => {
+                    card.classList.add('card-intro');
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateX(0) translateY(0) scale(1)';
+                    
+                    // Add special glow effect
+                    card.style.boxShadow = '0 0 30px rgba(0, 224, 255, 0.3), 0 15px 40px rgba(0, 0, 0, 0.4)';
+                    
+                    // Remove glow after animation
+                    setTimeout(() => {
+                        card.style.boxShadow = '';
+                    }, 1000);
+                }, index * 100); // Staggered delay
+            }
+            
+            animateCardOut(card, index) {
+                // Remove intro class
+                card.classList.remove('card-intro');
+                
+                // Add outro class
+                card.classList.add('card-outro');
+                
+                // Determine exit direction based on original position
+                if (index % 2 === 0) {
+                    // Even cards exit to left
+                    card.style.transform = 'translateX(-100px) translateY(20px) scale(0.95)';
+                } else {
+                    // Odd cards exit to right
+                    card.style.transform = 'translateX(100px) translateY(20px) scale(0.95)';
+                }
+                card.style.opacity = '0.5';
+            }
+        }
+        
+        // Initialize card animation manager
+        const cardManager = new CardAnimationManager();
         
         // Trigger stats animation when scrolled into view
         const statsSection = document.querySelector('#about .stats');
@@ -1541,29 +1779,11 @@
             }
         }
         
-        // Add scroll animations to all container-intro elements
-        const containerIntros = document.querySelectorAll('.container-intro');
-        
-        function checkScroll() {
-            containerIntros.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                const isVisible = rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0;
-                
-                if (isVisible) {
-                    element.style.animationPlayState = 'running';
-                }
-            });
-            
-            checkStatsVisibility();
-        }
-        
-        window.addEventListener('scroll', checkScroll);
-        
         // Create enhanced background animation with tech elements
         function createBackgroundAnimation() {
             const bg = document.getElementById('animation-bg');
             
-            // Create particles - more for tech feel
+            // Create particles
             for (let i = 0; i < 80; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -1573,14 +1793,13 @@
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 
-                // Faster animation for tech feel
                 const duration = Math.random() * 10 + 5;
                 particle.style.animationDuration = `${duration}s`;
                 
                 bg.appendChild(particle);
             }
             
-            // Create circuit lines - more for neural network feel
+            // Create circuit lines
             for (let i = 0; i < 25; i++) {
                 const line = document.createElement('div');
                 line.classList.add('circuit-line');
@@ -1590,35 +1809,32 @@
                 line.style.top = `${Math.random() * 100}%`;
                 line.style.transform = `rotate(${Math.random() * 360}deg)`;
                 
-                // Faster pulse animation
                 const duration = Math.random() * 15 + 10;
                 line.style.animationDuration = `${duration}s`;
                 
                 bg.appendChild(line);
             }
             
-            // Create nodes - tech connection points
+            // Create nodes
             for (let i = 0; i < 40; i++) {
                 const node = document.createElement('div');
                 node.classList.add('node');
                 node.style.left = `${Math.random() * 100}%`;
                 node.style.top = `${Math.random() * 100}%`;
                 
-                // Faster glow animation
                 const duration = Math.random() * 8 + 4;
                 node.style.animationDuration = `${duration}s`;
                 
                 bg.appendChild(node);
             }
             
-            // Create data streams for tech animation
+            // Create data streams
             for (let i = 0; i < 15; i++) {
                 const stream = document.createElement('div');
                 stream.classList.add('data-stream');
                 stream.style.left = `${Math.random() * 100}%`;
                 stream.style.width = `${Math.random() * 3 + 1}px`;
                 
-                // Random delay for staggered animation
                 stream.style.animationDelay = `${Math.random() * 5}s`;
                 
                 bg.appendChild(stream);
@@ -1636,7 +1852,6 @@
                 chip.style.fontSize = `${Math.random() * 20 + 15}px`;
                 chip.style.opacity = `${Math.random() * 0.2 + 0.05}`;
                 
-                // Random animation duration and delay
                 const duration = Math.random() * 30 + 20;
                 const delay = Math.random() * 10;
                 chip.style.animationDuration = `${duration}s`;
@@ -1651,16 +1866,14 @@
                 line.classList.add('motherboard-line');
                 
                 const width = Math.random() * 300 + 100;
-                const height = 1;
                 const angle = Math.random() * 360;
                 
                 line.style.width = `${width}px`;
-                line.style.height = `${height}px`;
+                line.style.height = '1px';
                 line.style.left = `${Math.random() * 100}%`;
                 line.style.top = `${Math.random() * 100}%`;
                 line.style.transform = `rotate(${angle}deg)`;
                 
-                // Random animation duration and delay
                 const duration = Math.random() * 8 + 4;
                 const delay = Math.random() * 5;
                 line.style.animationDuration = `${duration}s`;
@@ -1674,16 +1887,6 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // For demo purposes - in a real implementation, you would use EmailJS
-            // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-            
-            // Show success message with animation
             const form = this;
             const submitBtn = form.querySelector('.form-submit-btn');
             
@@ -1692,12 +1895,10 @@
             submitBtn.style.background = 'linear-gradient(90deg, var(--primary-purple), var(--primary-blue))';
             
             setTimeout(() => {
-                // Reset form and show success
                 form.reset();
                 submitBtn.textContent = 'Message Sent! ✓';
                 submitBtn.style.background = 'linear-gradient(90deg, #00cc66, #00b359)';
                 
-                // Reset button after 3 seconds
                 setTimeout(() => {
                     submitBtn.textContent = 'Send Message';
                     submitBtn.style.background = 'linear-gradient(90deg, var(--primary-blue), var(--primary-purple))';
@@ -1705,64 +1906,49 @@
             }, 1500);
         });
         
-        // Add text-reveal animation to all text elements on scroll
-        const textRevealElements = document.querySelectorAll('.text-reveal');
-        
-        function revealTextOnScroll() {
-            textRevealElements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                const isVisible = rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0;
-                
-                if (isVisible) {
-                    element.style.animationPlayState = 'running';
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', revealTextOnScroll);
-        
         // Add random glitch effect to company name at intervals
         function randomGlitchEffect() {
             const companyNames = document.querySelectorAll('.company-name');
             companyNames.forEach(name => {
-                // Random chance to trigger glitch
                 if (Math.random() < 0.1) {
                     name.classList.add('text-glitch');
                     
-                    // Remove glitch after short duration
                     setTimeout(() => {
                         name.classList.remove('text-glitch');
                     }, 300);
                 }
             });
             
-            // Schedule next glitch
             setTimeout(randomGlitchEffect, Math.random() * 3000 + 1000);
         }
         
         // Initialize background animation
         createBackgroundAnimation();
         
-        // Trigger initial checks
-        checkScroll();
-        revealTextOnScroll();
-        checkStatsVisibility();
-        
         // Start random glitch effect
         setTimeout(randomGlitchEffect, 2000);
         
-        // Add hover effect to glass cards
+        // Add enhanced hover effect to glass cards
         document.querySelectorAll('.glass-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-                this.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 224, 255, 0.5)';
+                if (this.classList.contains('workspace-card') && 
+                    this.classList.contains('card-intro')) {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    this.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 224, 255, 0.5)';
+                }
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-                this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+                if (this.classList.contains('workspace-card') && 
+                    this.classList.contains('card-intro')) {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+                }
             });
         });
+        
+        // Initial check for stats
+        setTimeout(checkStatsVisibility, 500);
     </script>
 </body>
-    </html>
+</html>
