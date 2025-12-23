@@ -44,6 +44,13 @@
             color: var(--text-light);
             overflow-x: hidden;
             line-height: 1.6;
+            opacity: 0;
+            animation: pageFadeIn 0.8s forwards;
+        }
+        
+        @keyframes pageFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         h1, h2, h3, h4, h5 {
@@ -103,6 +110,71 @@
             animation: stream 8s infinite linear;
         }
         
+        /* NEW: Animated Chips/Icons Background */
+        .chip-icon {
+            position: absolute;
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: rgba(0, 224, 255, 0.15);
+            font-size: 24px;
+            z-index: -1;
+            animation: chipFloat 20s infinite linear;
+        }
+        
+        /* NEW: Motherboard Lines Animation */
+        .motherboard-line {
+            position: absolute;
+            background: transparent;
+            z-index: -1;
+        }
+        
+        .motherboard-line::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--primary-cyan), transparent);
+            animation: motherboardFlow 6s infinite linear;
+        }
+        
+        /* Text Animation Classes */
+        .text-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: textReveal 0.8s forwards;
+        }
+        
+        .text-typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--primary-cyan);
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        .text-glitch {
+            position: relative;
+            animation: glitchText 5s infinite;
+        }
+        
+        /* Container Animation Classes */
+        .container-intro {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            animation: containerIntro 0.8s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .container-outro {
+            animation: containerOutro 0.8s forwards cubic-bezier(0.6, -0.28, 0.735, 0.045);
+        }
+        
+        .hover-float {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-float:hover {
+            transform: translateY(-10px);
+        }
+        
         /* Navbar */
         .navbar {
             position: fixed;
@@ -116,6 +188,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(100, 150, 255, 0.1);
+            animation: navbarSlideDown 0.6s forwards;
+            transform: translateY(-100%);
         }
         
         .logo {
@@ -141,7 +215,7 @@
             position: relative;
         }
         
-        /* Glitch Effect for Company Name */
+        /* Enhanced Glitch Effect for Company Name */
         .glitch {
             position: relative;
             display: inline-block;
@@ -156,68 +230,67 @@
             width: 100%;
             height: 100%;
             background: var(--dark-bg);
+            clip-path: inset(0 0 0 0);
         }
         
         .glitch::before {
             left: 2px;
             text-shadow: -2px 0 var(--primary-blue);
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim-1 5s infinite linear alternate-reverse;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
         }
         
         .glitch::after {
             left: -2px;
-            text-shadow: -2px 0 var(--primary-purple);
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim-2 5s infinite linear alternate-reverse;
+            text-shadow: 2px 0 var(--primary-purple);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
         }
         
         @keyframes glitch-anim-1 {
-            0% { clip: rect(20px, 9999px, 25px, 0); }
-            5% { clip: rect(15px, 9999px, 40px, 0); }
-            10% { clip: rect(30px, 9999px, 50px, 0); }
-            15% { clip: rect(10px, 9999px, 35px, 0); }
-            20% { clip: rect(25px, 9999px, 45px, 0); }
-            25% { clip: rect(15px, 9999px, 30px, 0); }
-            30% { clip: rect(40px, 9999px, 55px, 0); }
-            35% { clip: rect(20px, 9999px, 35px, 0); }
-            40% { clip: rect(30px, 9999px, 50px, 0); }
-            45% { clip: rect(10px, 9999px, 25px, 0); }
-            50% { clip: rect(35px, 9999px, 55px, 0); }
-            55% { clip: rect(15px, 9999px, 30px, 0); }
-            60% { clip: rect(25px, 9999px, 45px, 0); }
-            65% { clip: rect(5px, 9999px, 20px, 0); }
-            70% { clip: rect(30px, 9999px, 50px, 0); }
-            75% { clip: rect(20px, 9999px, 40px, 0); }
-            80% { clip: rect(10px, 9999px, 30px, 0); }
-            85% { clip: rect(35px, 9999px, 55px, 0); }
-            90% { clip: rect(25px, 9999px, 45px, 0); }
-            95% { clip: rect(15px, 9999px, 35px, 0); }
-            100% { clip: rect(40px, 9999px, 60px, 0); }
+            0% { clip-path: inset(20% 0 30% 0); transform: translate(0); }
+            5% { clip-path: inset(10% 0 45% 0); transform: translate(-1px, 1px); }
+            10% { clip-path: inset(40% 0 20% 0); transform: translate(1px, -1px); }
+            15% { clip-path: inset(15% 0 35% 0); transform: translate(-1px); }
+            20% { clip-path: inset(25% 0 15% 0); transform: translate(1px); }
+            25% { clip-path: inset(30% 0 30% 0); transform: translate(0); }
+            30% { clip-path: inset(10% 0 50% 0); transform: translate(-1px, 1px); }
+            35% { clip-path: inset(40% 0 10% 0); transform: translate(1px, -1px); }
+            40% { clip-path: inset(20% 0 40% 0); transform: translate(-1px); }
+            45% { clip-path: inset(35% 0 15% 0); transform: translate(1px); }
+            50% { clip-path: inset(25% 0 25% 0); transform: translate(0); }
+            55% { clip-path: inset(5% 0 55% 0); transform: translate(-1px, 1px); }
+            60% { clip-path: inset(45% 0 5% 0); transform: translate(1px, -1px); }
+            65% { clip-path: inset(25% 0 35% 0); transform: translate(-1px); }
+            70% { clip-path: inset(30% 0 20% 0); transform: translate(1px); }
+            75% { clip-path: inset(15% 0 35% 0); transform: translate(0); }
+            80% { clip-path: inset(10% 0 50% 0); transform: translate(-1px, 1px); }
+            85% { clip-path: inset(40% 0 10% 0); transform: translate(1px, -1px); }
+            90% { clip-path: inset(20% 0 40% 0); transform: translate(-1px); }
+            95% { clip-path: inset(35% 0 15% 0); transform: translate(1px); }
+            100% { clip-path: inset(25% 0 25% 0); transform: translate(0); }
         }
         
         @keyframes glitch-anim-2 {
-            0% { clip: rect(60px, 9999px, 70px, 0); }
-            5% { clip: rect(55px, 9999px, 65px, 0); }
-            10% { clip: rect(70px, 9999px, 80px, 0); }
-            15% { clip: rect(50px, 9999px, 75px, 0); }
-            20% { clip: rect(65px, 9999px, 85px, 0); }
-            25% { clip: rect(55px, 9999px, 70px, 0); }
-            30% { clip: rect(80px, 9999px, 95px, 0); }
-            35% { clip: rect(60px, 9999px, 75px, 0); }
-            40% { clip: rect(70px, 9999px, 90px, 0); }
-            45% { clip: rect(50px, 9999px, 65px, 0); }
-            50% { clip: rect(75px, 9999px, 95px, 0); }
-            55% { clip: rect(55px, 9999px, 70px, 0); }
-            60% { clip: rect(65px, 9999px, 85px, 0); }
-            65% { clip: rect(45px, 9999px, 60px, 0); }
-            70% { clip: rect(70px, 9999px, 90px, 0); }
-            75% { clip: rect(60px, 9999px, 80px, 0); }
-            80% { clip: rect(50px, 9999px, 70px, 0); }
-            85% { clip: rect(75px, 9999px, 95px, 0); }
-            90% { clip: rect(65px, 9999px, 85px, 0); }
-            95% { clip: rect(55px, 9999px, 75px, 0); }
-            100% { clip: rect(80px, 9999px, 100px, 0); }
+            0% { clip-path: inset(50% 0 20% 0); transform: translate(0); }
+            5% { clip-path: inset(30% 0 40% 0); transform: translate(1px, -1px); }
+            10% { clip-path: inset(60% 0 10% 0); transform: translate(-1px, 1px); }
+            15% { clip-path: inset(35% 0 25% 0); transform: translate(1px); }
+            20% { clip-path: inset(45% 0 15% 0); transform: translate(-1px); }
+            25% { clip-path: inset(40% 0 30% 0); transform: translate(0); }
+            30% { clip-path: inset(20% 0 40% 0); transform: translate(1px, -1px); }
+            35% { clip-path: inset(60% 0 10% 0); transform: translate(-1px, 1px); }
+            40% { clip-path: inset(40% 0 20% 0); transform: translate(1px); }
+            45% { clip-path: inset(55% 0 15% 0); transform: translate(-1px); }
+            50% { clip-path: inset(45% 0 25% 0); transform: translate(0); }
+            55% { clip-path: inset(25% 0 45% 0); transform: translate(1px, -1px); }
+            60% { clip-path: inset(65% 0 5% 0); transform: translate(-1px, 1px); }
+            65% { clip-path: inset(45% 0 25% 0); transform: translate(1px); }
+            70% { clip-path: inset(50% 0 20% 0); transform: translate(-1px); }
+            75% { clip-path: inset(35% 0 35% 0); transform: translate(0); }
+            80% { clip-path: inset(30% 0 40% 0); transform: translate(1px, -1px); }
+            85% { clip-path: inset(60% 0 10% 0); transform: translate(-1px, 1px); }
+            90% { clip-path: inset(40% 0 20% 0); transform: translate(1px); }
+            95% { clip-path: inset(55% 0 15% 0); transform: translate(-1px); }
+            100% { clip-path: inset(45% 0 25% 0); transform: translate(0); }
         }
         
         .nav-links {
@@ -233,7 +306,16 @@
             border-radius: 4px;
             transition: all 0.3s ease;
             position: relative;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: navLinkFade 0.5s forwards;
         }
+        
+        .nav-links a:nth-child(1) { animation-delay: 0.2s; }
+        .nav-links a:nth-child(2) { animation-delay: 0.3s; }
+        .nav-links a:nth-child(3) { animation-delay: 0.4s; }
+        .nav-links a:nth-child(4) { animation-delay: 0.5s; }
+        .nav-links a:nth-child(5) { animation-delay: 0.6s; }
         
         .nav-links a:hover {
             color: var(--primary-cyan);
@@ -280,6 +362,8 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            opacity: 0;
+            animation: titleReveal 1s forwards 0.3s;
         }
         
         .section-subtitle {
@@ -288,6 +372,8 @@
             font-size: 1.1rem;
             max-width: 700px;
             margin: 0 auto 3rem;
+            opacity: 0;
+            animation: subtitleReveal 1s forwards 0.5s;
         }
         
         /* Hero Section */
@@ -310,6 +396,8 @@
             margin-bottom: 1rem;
             line-height: 1.2;
             color: var(--text-light);
+            opacity: 0;
+            animation: heroTitleReveal 1s forwards 0.2s;
         }
         
         .hero-title .company-name {
@@ -327,6 +415,8 @@
             color: var(--primary-cyan);
             margin-bottom: 1.5rem;
             font-weight: 500;
+            opacity: 0;
+            animation: heroSubtitleReveal 1s forwards 0.4s;
         }
         
         .hero-description {
@@ -335,6 +425,8 @@
             max-width: 700px;
             margin: 0 auto 3rem;
             line-height: 1.8;
+            opacity: 0;
+            animation: heroDescriptionReveal 1s forwards 0.6s;
         }
         
         .cta-buttons {
@@ -342,6 +434,8 @@
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            opacity: 0;
+            animation: ctaButtonsReveal 1s forwards 0.8s;
         }
         
         /* Buttons */
@@ -366,7 +460,7 @@
         }
         
         .btn-primary:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 0 20px rgba(0, 224, 255, 0.9), 0 0 30px rgba(157, 78, 221, 0.7);
         }
         
@@ -378,7 +472,7 @@
         
         .btn-secondary:hover {
             background: rgba(0, 224, 255, 0.1);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
         }
         
         /* Glass Cards */
@@ -393,8 +487,8 @@
         }
         
         .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(100, 150, 255, 0.4);
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(100, 150, 255, 0.6);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), var(--neon-glow);
         }
         
@@ -609,6 +703,7 @@
             outline: none;
             border-color: var(--primary-cyan);
             box-shadow: 0 0 10px rgba(0, 224, 255, 0.3);
+            transform: translateY(-2px);
         }
         
         select.form-control {
@@ -637,6 +732,8 @@
             padding: 4rem 2rem 3rem;
             margin-top: 5rem;
             border-top: 1px solid rgba(100, 150, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
         
         .footer-content {
@@ -645,6 +742,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
+            position: relative;
+            z-index: 2;
         }
         
         .footer-about {
@@ -692,7 +791,7 @@
         }
         
         .social-icon:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.1);
             background: rgba(255, 255, 255, 0.1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
@@ -731,7 +830,7 @@
         
         .footer-links a:hover {
             color: var(--primary-cyan);
-            padding-left: 5px;
+            padding-left: 10px;
         }
         
         .footer-contact p {
@@ -749,9 +848,102 @@
             border-top: 1px solid rgba(100, 150, 255, 0.1);
             color: var(--text-gray);
             font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
         }
         
-        /* Animation Keyframes */
+        /* NEW ANIMATION KEYFRAMES */
+        
+        @keyframes navbarSlideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        @keyframes navLinkFade {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes titleReveal {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes subtitleReveal {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes heroTitleReveal {
+            from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        @keyframes heroSubtitleReveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes heroDescriptionReveal {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes ctaButtonsReveal {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes textReveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-cyan) }
+        }
+        
+        @keyframes glitchText {
+            0% { transform: translate(0); }
+            1% { transform: translate(-1px, 1px); }
+            2% { transform: translate(1px, -1px); }
+            3% { transform: translate(0); }
+            4% { transform: translate(1px, 1px); }
+            5% { transform: translate(-1px, -1px); }
+            6% { transform: translate(0); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes containerIntro {
+            from { opacity: 0; transform: translateY(50px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        @keyframes containerOutro {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to { opacity: 0; transform: translateY(50px) scale(0.95); }
+        }
+        
+        @keyframes chipFloat {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translate(100px, 50px) rotate(90deg); opacity: 0.3; }
+            50% { transform: translate(50px, 100px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translate(-50px, 50px) rotate(270deg); opacity: 0.3; }
+            100% { transform: translate(0, 0) rotate(360deg); opacity: 0.1; }
+        }
+        
+        @keyframes motherboardFlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Original Animation Keyframes */
         @keyframes float {
             0% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
             25% { transform: translate(20px, 20px) rotate(90deg); opacity: 0.6; }
@@ -922,7 +1114,7 @@
     <section class="hero section" id="home">
         <div class="hero-content">
             <h1 class="hero-title">
-                <span class="company-name glitch" data-text="AVENTRO TECH SOLUTIONS">AVENTRO TECH SOLUTIONS</span>
+                <span class="company-name glitch text-glitch" data-text="AVENTRO TECH SOLUTIONS">AVENTRO TECH SOLUTIONS</span>
             </h1>
             <h2 class="hero-subtitle">Pioneering the Future with AI & Agent-Based Solutions</h2>
             <p class="hero-description">Custom AI/ML development for any level of the stack. From concept to deployment, we transform your ideas into intelligent solutions.</p>
@@ -935,21 +1127,21 @@
     
     <!-- About Section -->
     <section class="section" id="about">
-        <h2 class="section-title">About Us</h2>
+        <h2 class="section-title text-reveal">About Us</h2>
         <p class="section-subtitle">Cutting-edge technology company specializing in AI and Agent-based solutions</p>
         
         <div class="about-content">
-            <div class="glass-card">
+            <div class="glass-card container-intro hover-float" style="animation-delay: 0.2s">
                 <p class="about-text">Aventro Tech Solutions is a cutting-edge technology company specializing in AI and Agent-based solutions. We empower businesses of all sizes with custom AI/ML development, from initial concept to full-scale deployment.</p>
                 <p class="about-text" style="margin-top: 1.5rem;">Our team of expert developers and data scientists deliver innovative solutions that transform how businesses operate.</p>
             </div>
             
             <div class="mission-vision">
-                <div class="mission glass-card">
+                <div class="mission glass-card container-intro hover-float" style="animation-delay: 0.3s">
                     <h3><i class="fas fa-bullseye"></i> Mission</h3>
                     <p>To democratize AI technology and make intelligent solutions accessible to businesses worldwide.</p>
                 </div>
-                <div class="vision glass-card">
+                <div class="vision glass-card container-intro hover-float" style="animation-delay: 0.4s">
                     <h3><i class="fas fa-eye"></i> Vision</h3>
                     <p>To be the global leader in AI innovation, shaping a smarter, more connected future.</p>
                 </div>
@@ -958,28 +1150,28 @@
         
         <!-- Core Values -->
         <div class="core-values">
-            <div class="value-card glass-card">
+            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
                 <div class="value-icon">
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <h3>Innovation First</h3>
                 <p>We constantly push boundaries to deliver cutting-edge AI solutions.</p>
             </div>
-            <div class="value-card glass-card">
+            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
                 <div class="value-icon">
                     <i class="fas fa-users"></i>
                 </div>
                 <h3>Client-Centric</h3>
                 <p>Your success is our priority. We tailor solutions to your specific needs.</p>
             </div>
-            <div class="value-card glass-card">
+            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
                 <div class="value-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3>Integrity</h3>
                 <p>We maintain the highest ethical standards in all our engagements.</p>
             </div>
-            <div class="value-card glass-card">
+            <div class="value-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
                 <div class="value-icon">
                     <i class="fas fa-rocket"></i>
                 </div>
@@ -990,19 +1182,19 @@
         
         <!-- Stats Counter -->
         <div class="stats">
-            <div class="stat-card glass-card">
+            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
                 <div class="stat-number" id="projectsCount">0</div>
                 <div class="stat-text">Projects Completed</div>
             </div>
-            <div class="stat-card glass-card">
+            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
                 <div class="stat-number" id="clientsCount">0</div>
                 <div class="stat-text">Clients Served</div>
             </div>
-            <div class="stat-card glass-card">
+            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
                 <div class="stat-number" id="solutionsCount">0</div>
                 <div class="stat-text">AI Solutions</div>
             </div>
-            <div class="stat-card glass-card">
+            <div class="stat-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
                 <div class="stat-number">24/7</div>
                 <div class="stat-text">Support</div>
             </div>
@@ -1011,11 +1203,11 @@
     
     <!-- Services Section -->
     <section class="section" id="services">
-        <h2 class="section-title">Our Services</h2>
+        <h2 class="section-title text-reveal">Our Services</h2>
         <p class="section-subtitle">Comprehensive AI solutions designed to transform your business</p>
         
         <div class="services-grid">
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.1s">
                 <div class="service-icon">
                     <i class="fas fa-brain"></i>
                 </div>
@@ -1023,7 +1215,7 @@
                 <p>Custom machine learning models and AI systems tailored to your business needs.</p>
             </div>
             
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
                 <div class="service-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
@@ -1031,7 +1223,7 @@
                 <p>Advanced analytics to forecast trends and make data-driven decisions.</p>
             </div>
             
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
                 <div class="service-icon">
                     <i class="fas fa-eye"></i>
                 </div>
@@ -1039,7 +1231,7 @@
                 <p>Image and video analysis solutions for automation and insights.</p>
             </div>
             
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
                 <div class="service-icon">
                     <i class="fas fa-network-wired"></i>
                 </div>
@@ -1047,7 +1239,7 @@
                 <p>Design and implementation of deep learning neural networks.</p>
             </div>
             
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
                 <div class="service-icon">
                     <i class="fas fa-robot"></i>
                 </div>
@@ -1055,7 +1247,7 @@
                 <p>Intelligent agent systems for automation and complex task management.</p>
             </div>
             
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.6s">
                 <div class="service-icon">
                     <i class="fas fa-comments"></i>
                 </div>
@@ -1063,7 +1255,7 @@
                 <p>Large Language Model integration and custom agent development.</p>
             </div>
             
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.7s">
                 <div class="service-icon">
                     <i class="fas fa-cogs"></i>
                 </div>
@@ -1071,7 +1263,7 @@
                 <p>Streamline business processes with intelligent automation solutions.</p>
             </div>
             
-            <div class="service-card glass-card">
+            <div class="service-card glass-card container-intro hover-float" style="animation-delay: 0.8s">
                 <div class="service-icon">
                     <i class="fas fa-cloud-upload-alt"></i>
                 </div>
@@ -1083,11 +1275,11 @@
     
     <!-- Training & Programs Section -->
     <section class="section" id="programs">
-        <h2 class="section-title">Training & Programs</h2>
+        <h2 class="section-title text-reveal">Training & Programs</h2>
         <p class="section-subtitle">Empowering the next generation of AI professionals</p>
         
         <div class="programs-grid">
-            <div class="program-card glass-card">
+            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.1s">
                 <h3><i class="fas fa-user-graduate"></i> Internship Program</h3>
                 <div class="program-detail"><i class="fas fa-calendar-alt"></i> Duration: 3–6 Months</div>
                 <div class="program-detail"><i class="fas fa-project-diagram"></i> Real-world AI projects</div>
@@ -1096,7 +1288,7 @@
                 <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Apply Now</a>
             </div>
             
-            <div class="program-card glass-card">
+            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
                 <h3><i class="fas fa-university"></i> Academic Projects</h3>
                 <div class="program-detail"><i class="fas fa-clock"></i> Flexible duration</div>
                 <div class="program-detail"><i class="fas fa-file-alt"></i> Documentation support</div>
@@ -1105,7 +1297,7 @@
                 <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Start Project</a>
             </div>
             
-            <div class="program-card glass-card">
+            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
                 <h3><i class="fas fa-workshop"></i> Workshops</h3>
                 <div class="program-detail"><i class="fas fa-calendar-alt"></i> Duration: 1–5 Days</div>
                 <div class="program-detail"><i class="fas fa-laptop-code"></i> Hands-on coding sessions</div>
@@ -1114,7 +1306,7 @@
                 <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">Join Workshop</a>
             </div>
             
-            <div class="program-card glass-card">
+            <div class="program-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
                 <h3><i class="fas fa-campground"></i> Boot Camps</h3>
                 <div class="program-detail"><i class="fas fa-calendar-alt"></i> Duration: 4–12 Weeks</div>
                 <div class="program-detail"><i class="fas fa-briefcase"></i> Career guidance</div>
@@ -1127,36 +1319,36 @@
     
     <!-- Why Choose Us Section -->
     <section class="section" id="why-us">
-        <h2 class="section-title">Why Choose Us</h2>
+        <h2 class="section-title text-reveal">Why Choose Us</h2>
         <p class="section-subtitle">What sets us apart in the AI solutions landscape</p>
         
         <div class="features-grid">
-            <div class="feature-card glass-card">
+            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.1s">
                 <h3><i class="fas fa-microchip"></i> Cutting-Edge Technology</h3>
                 <p>We use the latest AI frameworks and tools to deliver state-of-the-art solutions.</p>
             </div>
             
-            <div class="feature-card glass-card">
+            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.2s">
                 <h3><i class="fas fa-shield-alt"></i> Security First</h3>
                 <p>Your data and intellectual property are protected with enterprise-grade security.</p>
             </div>
             
-            <div class="feature-card glass-card">
+            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.3s">
                 <h3><i class="fas fa-handshake"></i> Client Partnership</h3>
                 <p>We work closely with you throughout the project lifecycle, ensuring alignment with your goals.</p>
             </div>
             
-            <div class="feature-card glass-card">
+            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.4s">
                 <h3><i class="fas fa-bolt"></i> Rapid Delivery</h3>
                 <p>Agile development methodology ensures faster time-to-market for your AI solutions.</p>
             </div>
             
-            <div class="feature-card glass-card">
+            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.5s">
                 <h3><i class="fas fa-expand-arrows-alt"></i> Scalable Solutions</h3>
                 <p>Our architectures are designed to grow with your business needs.</p>
             </div>
             
-            <div class="feature-card glass-card">
+            <div class="feature-card glass-card container-intro hover-float" style="animation-delay: 0.6s">
                 <h3><i class="fas fa-headset"></i> 24/7 Support</h3>
                 <p>Round-the-clock technical support and maintenance for all our solutions.</p>
             </div>
@@ -1165,11 +1357,11 @@
     
     <!-- Contact Section -->
     <section class="section" id="contact">
-        <h2 class="section-title">Contact Us</h2>
+        <h2 class="section-title text-reveal">Contact Us</h2>
         <p class="section-subtitle">Get in touch to discuss your AI project or training needs</p>
         
         <div class="contact-container">
-            <div class="contact-info glass-card">
+            <div class="contact-info glass-card container-intro hover-float" style="animation-delay: 0.1s">
                 <h3>Contact Information</h3>
                 <div class="contact-details">
                     <div class="contact-detail">
@@ -1204,7 +1396,7 @@
                 </div>
             </div>
             
-            <div class="contact-form glass-card">
+            <div class="contact-form glass-card container-intro hover-float" style="animation-delay: 0.2s">
                 <h3>Send us a Message</h3>
                 <form id="contactForm">
                     <div class="form-group">
@@ -1349,9 +1541,25 @@
             }
         }
         
-        window.addEventListener('scroll', checkStatsVisibility);
+        // Add scroll animations to all container-intro elements
+        const containerIntros = document.querySelectorAll('.container-intro');
         
-        // Create background animation with faster tech speed
+        function checkScroll() {
+            containerIntros.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0;
+                
+                if (isVisible) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+            
+            checkStatsVisibility();
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        
+        // Create enhanced background animation with tech elements
         function createBackgroundAnimation() {
             const bg = document.getElementById('animation-bg');
             
@@ -1415,6 +1623,51 @@
                 
                 bg.appendChild(stream);
             }
+            
+            // Create animated chip icons
+            const chipIcons = ['\uf2db', '\uf5fc', '\uf6ff', '\uf085', '\uf0e7', '\uf1e6', '\uf7b2', '\uf529'];
+            
+            for (let i = 0; i < 30; i++) {
+                const chip = document.createElement('div');
+                chip.classList.add('chip-icon');
+                chip.textContent = chipIcons[Math.floor(Math.random() * chipIcons.length)];
+                chip.style.left = `${Math.random() * 100}%`;
+                chip.style.top = `${Math.random() * 100}%`;
+                chip.style.fontSize = `${Math.random() * 20 + 15}px`;
+                chip.style.opacity = `${Math.random() * 0.2 + 0.05}`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 30 + 20;
+                const delay = Math.random() * 10;
+                chip.style.animationDuration = `${duration}s`;
+                chip.style.animationDelay = `${delay}s`;
+                
+                bg.appendChild(chip);
+            }
+            
+            // Create motherboard lines
+            for (let i = 0; i < 12; i++) {
+                const line = document.createElement('div');
+                line.classList.add('motherboard-line');
+                
+                const width = Math.random() * 300 + 100;
+                const height = 1;
+                const angle = Math.random() * 360;
+                
+                line.style.width = `${width}px`;
+                line.style.height = `${height}px`;
+                line.style.left = `${Math.random() * 100}%`;
+                line.style.top = `${Math.random() * 100}%`;
+                line.style.transform = `rotate(${angle}deg)`;
+                
+                // Random animation duration and delay
+                const duration = Math.random() * 8 + 4;
+                const delay = Math.random() * 5;
+                line.style.animationDuration = `${duration}s`;
+                line.style.animationDelay = `${delay}s`;
+                
+                bg.appendChild(line);
+            }
         }
         
         // Contact form submission
@@ -1430,18 +1683,86 @@
             // For demo purposes - in a real implementation, you would use EmailJS
             // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
             
-            // Show success message (demo)
-            alert(`Thank you ${name}! Your message about "${subject}" has been sent successfully. We'll contact you at ${email} soon.`);
+            // Show success message with animation
+            const form = this;
+            const submitBtn = form.querySelector('.form-submit-btn');
             
-            // Reset form
-            this.reset();
+            // Animate button
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.background = 'linear-gradient(90deg, var(--primary-purple), var(--primary-blue))';
+            
+            setTimeout(() => {
+                // Reset form and show success
+                form.reset();
+                submitBtn.textContent = 'Message Sent! ✓';
+                submitBtn.style.background = 'linear-gradient(90deg, #00cc66, #00b359)';
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.textContent = 'Send Message';
+                    submitBtn.style.background = 'linear-gradient(90deg, var(--primary-blue), var(--primary-purple))';
+                }, 3000);
+            }, 1500);
         });
+        
+        // Add text-reveal animation to all text elements on scroll
+        const textRevealElements = document.querySelectorAll('.text-reveal');
+        
+        function revealTextOnScroll() {
+            textRevealElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0;
+                
+                if (isVisible) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', revealTextOnScroll);
+        
+        // Add random glitch effect to company name at intervals
+        function randomGlitchEffect() {
+            const companyNames = document.querySelectorAll('.company-name');
+            companyNames.forEach(name => {
+                // Random chance to trigger glitch
+                if (Math.random() < 0.1) {
+                    name.classList.add('text-glitch');
+                    
+                    // Remove glitch after short duration
+                    setTimeout(() => {
+                        name.classList.remove('text-glitch');
+                    }, 300);
+                }
+            });
+            
+            // Schedule next glitch
+            setTimeout(randomGlitchEffect, Math.random() * 3000 + 1000);
+        }
         
         // Initialize background animation
         createBackgroundAnimation();
         
-        // Trigger initial check for stats
+        // Trigger initial checks
+        checkScroll();
+        revealTextOnScroll();
         checkStatsVisibility();
+        
+        // Start random glitch effect
+        setTimeout(randomGlitchEffect, 2000);
+        
+        // Add hover effect to glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 224, 255, 0.5)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+            });
+        });
     </script>
 </body>
-</html>
+    </html>
